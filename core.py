@@ -1,3 +1,8 @@
+import subprocess
+import sys
+
+subprocess.check_call([sys.executable, "-m", "pip", "install", "./post-requirements.txt"])
+
 import pickle
 import numpy as np 
 import pandas as pd

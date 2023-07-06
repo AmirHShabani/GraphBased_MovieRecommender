@@ -1,4 +1,8 @@
--r ./prerequirements.txt
-torch_geometric
-torch_scatter
-torch_sparse
+requests
+pillow
+numpy
+pandas
+scikit-learn
+torch
+torchvision
+torchaudio
