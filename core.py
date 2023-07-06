@@ -1,7 +1,16 @@
-import subprocess
-import sys
+import pip
 
-subprocess.check_call([sys.executable, "-m", "pip", "install", "./post-requirements.txt"])
+def install(package):
+    if hasattr(pip, 'main'):
+        pip.main(['install', package])
+    else:
+        pip._internal.main(['install', package])
+
+print("Everything goes bang")
+install('torch_geometric')
+install('torch_scatter')
+install('torch_sparse')
+print("It's havoc baby")
 
 import pickle
 import numpy as np 
