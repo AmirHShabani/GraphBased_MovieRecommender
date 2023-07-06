@@ -1,8 +1,0 @@
-requests
-pillow
-numpy
-pandas
-scikit-learn
-torch
-torchvision
-torchaudio
