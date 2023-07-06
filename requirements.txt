@@ -1,4 +1,4 @@
--r prerequirements.txt
+-r ./prerequirements.txt
 torch_geometric
 torch_scatter
 torch_sparse
