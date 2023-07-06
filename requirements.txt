@@ -1,3 +1,11 @@
+requests
+pillow
+numpy
+pandas
+scikit-learn
+torch
+torchvision
+torchaudio
 torch_geometric
 torch_scatter
 torch_sparse
