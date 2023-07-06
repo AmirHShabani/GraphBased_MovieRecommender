@@ -1,9 +1,3 @@
-torch 
-torch_geometric torch_scatter
-torch_sparse 
-category_encoders
-tensorflow_hub
-tensorflow 
-sklearn.model_selection
-ast
-re
+torch_geometric
+torch_scatter
+torch_sparse
