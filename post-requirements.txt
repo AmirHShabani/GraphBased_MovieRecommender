@@ -1,3 +1,0 @@
-torch_geometric
-torch_scatter
-torch_sparse
