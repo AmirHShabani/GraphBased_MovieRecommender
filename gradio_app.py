@@ -101,7 +101,7 @@ def display_movie(movie, rating):
     user_input[movie] = rating 
     poster = get_poster(movie)
     
-    if len(user_input) > 5:
+    if len(user_input) == 5:
         # Get the recommended movies from the input 
         r_movies, r_posters = get_recommendations(user_input) 
         
