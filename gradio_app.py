@@ -121,10 +121,12 @@ def display_movie(movie, rating):
 iface = gr.Interface(
     
     fn= display_movie, 
-    inputs= [gr.Textbox(label="Enter a movie name"), gr.Slider(minimum=0, maximum=5, step=1, label="Rate the movie")],
+    inputs= [gr.Textbox(label="Enter a movie name (five movie in total!)"), gr.Slider(minimum=0, maximum=5, step=1, label="Rate the movie")],
     outputs= [gr.Textbox(label="Output", min_width=200), gr.components.Image(label="Poster", height=400, width=300), gr.components.HTML(label="Recommendations", height=400)],
     live= False,
-    examples=[["The Matrix"], ["The Lion King"], ["Titanic"], ['Fight Club'], ["Inception"]]
+    examples=[["The Matrix"], ["The Lion King"], ["Titanic"], ['Fight Club'], ["Inception"]], 
+    title = "Movie Recommender",
+
     )
 
 iface.launch()
