@@ -159,7 +159,8 @@ def create_user_embedding(movie_ratings, movies_df):
     # Convert the movie_ratings dictionary to a dataframe
     user_ratings_df = pd.DataFrame.from_dict(movie_ratings, orient='index', columns=['rating'])
     user_ratings_df['movieId'] = user_ratings_df.index
-
+    print(user_ratings_df)
+    print(user_movie_embeddings)
     # Merge the user_ratings_df with the movies_df to get the movie embeddings
     user_movie_embeddings = user_ratings_df.merge(movies_df, on='movieId', how='left')
 
