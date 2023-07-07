@@ -2,6 +2,7 @@ requests==2.29.0
 pillow
 numpy==1.23.5
 pandas==1.5.3
+thefuzz[speedup]
 scikit-learn==1.2.2
 torch==2.0.0
 torchvision==0.15.1

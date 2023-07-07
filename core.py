@@ -28,6 +28,9 @@ from torch_geometric.nn.conv.gcn_conv import gcn_norm
 from torch_geometric.nn.conv import MessagePassing
 from torch_geometric.typing import Adj
 from sklearn.neighbors import BallTree
+from thefuzz import fuzz
+from thefuzz import process
+
 class LightGCN(MessagePassing):
     def __init__(self, num_users, num_items, embedding_dim=64, diffusion_steps=3, add_self_loops=False):
         super().__init__()
@@ -186,7 +189,8 @@ def drop_non_numerical_columns(df):
 def output_list(input_dict, movies_df = movie_embeds, tree = btree, user_embeddings = user_embeds, movies = final_movies):
     movie_ratings = {}
     for movie_title in input_dict:
-        index = movies.index[movies['title'] == movie_title].tolist()[0]
+        matching_title = process.extractOne(movie_title, final_movies['title'].values, scorer=fuzz.token_sort_ratio)[0]
+        index = movies.index[movies['title'] == matching_title].tolist()[0]
         movie_ratings[index] = input_dict[movie_title]
     user_embed = create_user_embedding(movie_ratings, movie_embeds)
     # Call the find_closest_user function with the pre-built BallTree
