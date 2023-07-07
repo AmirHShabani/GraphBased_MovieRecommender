@@ -37,6 +37,8 @@ def get_data(movie):
     if data['Response'] == 'True': # Check if the response is successful  
         status = data['Response']
         poster = data["Poster"]
+        if not isinstance(poster, str):
+            poster = "https://t2.gstatic.com/licensed-image?q=tbn:ANd9GcRav8An8wQSdccA_9fjnx0W_SH3xunzQXaitfpWmZpUKiLfKpMNRY_kZf5-6EQk2ZSi"
         title = data["Title"]
         year = data["Year"]
         director = data["Director"]
@@ -54,17 +56,7 @@ def get_data(movie):
             "rating": rating,
             "year" : year
         }
-    else:
-        return {
-            "status": 'False',       
-            "poster": 'https://en.wikiquote.org/wiki/Black',
-            "title": 'Movie not found!',
-            "director": '',
-            "cast": '',
-            "genres": '',
-            "rating": '',
-            "year" : ''
-        }
+
     
 # Recommendation Function 
 from core import output_list
