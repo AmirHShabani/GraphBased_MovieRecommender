@@ -53,7 +53,18 @@ def get_data(movie):
             "genres": genres,
             "rating": rating,
             "year" : year
-               }
+        }
+    else:
+        return {
+            "status": 'False',       
+            "poster": 'https://en.wikiquote.org/wiki/Black',
+            "title": 'Movie not found!',
+            "director": '',
+            "cast": '',
+            "genres": '',
+            "rating": '',
+            "year" : ''
+        }
     
 # Recommendation Function 
 from core import output_list
