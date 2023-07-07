@@ -158,7 +158,7 @@ def create_user_embedding(movie_ratings, movies_df):
     user_ratings_df['movieId'] = user_ratings_df.index
 
     # Merge the user_ratings_df with the movies_df to get the movie embeddings
-    user_movie_embeddings = user_ratings_df.merge((movies_df).astype('folat'), on='movieId', how='left')
+    user_movie_embeddings = user_ratings_df.merge((movies_df).astype('float'), on='movieId', how='left')
 
     # Multiply the ratings with the movie embeddings
     user_movie_embeddings = user_movie_embeddings.iloc[:, 2:].values * user_movie_embeddings['rating'].values[:, np.newaxis]
