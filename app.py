@@ -35,6 +35,7 @@ def get_data(movie):
     data = response.json()
     
     if data['Response'] == 'True': # Check if the response is successful  
+        status = data['Response']
         poster = data["Poster"]
         title = data["Title"]
         year = data["Year"]
@@ -44,7 +45,7 @@ def get_data(movie):
         rating = data["imdbRating"]
         # Return a dictionary with the information
         return {
-                    
+            "status": status,       
             "poster": poster,
             "title": title,
             "director": director,
@@ -105,9 +106,10 @@ def display_movie(movie, rating):
     
     global user_input 
     data = get_data(movie)
-    user_input[f"{data['title']} ({data['year']})"] = rating 
-    poster = get_poster(movie)
-    
+    if data['status'] == True:    
+        user_input[f"{data['title']} ({data['year']})"] = rating 
+        poster = get_poster(data['title'])
+
     if len(user_input) == 5:
         # Get the recommended movies from the input 
         r_movies, r_posters = get_recommendations(user_input) 
@@ -119,10 +121,12 @@ def display_movie(movie, rating):
         # Return the output 
         return f"Your movies are ready!\nPlease check the recommendations below.", np.zeros((500, 500, 3)), html_code
     
-    else:
+    elif data['status'] == True:
         
         # Return the input movie name and poster 
         return f"You entered {movie} with rating {rating}", poster, ""
+    else:
+        return f"we can't find {movie} please try again", np.zeros((500, 500, 3)), ""
 
 # Interface 
 iface = gr.Interface(
