@@ -104,7 +104,8 @@ user_input = {}
 def display_movie(movie, rating):
     
     global user_input 
-    user_input[movie] = rating 
+    data = get_data(movie)
+    user_input[f"{data['title']} ({data['year']})"] = rating 
     poster = get_poster(movie)
     
     if len(user_input) == 5:
