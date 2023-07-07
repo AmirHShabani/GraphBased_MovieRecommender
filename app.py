@@ -131,8 +131,8 @@ iface = gr.Interface(
     inputs= [gr.Textbox(label="Enter a movie name (five movie in total!)"), gr.Slider(minimum=0, maximum=5, step=1, label="Rate the movie")],
     outputs= [gr.Textbox(label="Output", min_width=200), gr.components.Image(label="Poster", height=400, width=300), gr.components.HTML(label="Recommendations", height=400)],
     live= False,
-    examples=[["The Matrix"], ["The Lion King"], ["Titanic"], ['Fight Club'], ["Inception"], ["Pulp Fiction"], ["Forrest Gump"], ["Schindler’s List"]], 
-    title = "Movie Recommender",
+    #examples=[["The Matrix"], ["The Lion King"], ["Titanic"], ['Fight Club'], ["Inception"], ["Pulp Fiction"], ["Forrest Gump"], ["Schindler’s List"]], 
+    title = "Movie Recommender"
 
     )
 
