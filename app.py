@@ -4,11 +4,11 @@ import numpy as np
 import pandas as pd 
 from PIL import Image
 
-# api_key = "4e45e5b0" 
+# api_key =  "a4ed408" _ added to get_poster and get_data Function! 
 
 # A function that takes a movie name and returns its poster image as a numpy array
 def get_poster(movie):
-    api_key = "4e45e5b0" 
+    api_key = "a4ed408" 
     base_url = "http://www.omdbapi.com/"
     
     params = {"apikey": api_key , "t": movie}
@@ -37,6 +37,7 @@ def get_data(movie):
     if data['Response'] == 'True': # Check if the response is successful  
         poster = data["Poster"]
         title = data["Title"]
+        year = data["Year"]
         director = data["Director"]
         cast = data["Actors"]
         genres = data["Genre"]
@@ -49,13 +50,15 @@ def get_data(movie):
             "director": director,
             "cast": cast,
             "genres": genres,
-            "rating": rating
+            "rating": rating,
+            "year" : year
                }
+    
 # Recommendation Function 
 from core import output_list
 def get_recommendations(input_list):
     movie_names = output_list(input_list)
-    movies_data = [get_data(movie) for movie in movie_names]
+    #movies_data = [get_data(movie) for movie in movie_names]
     
     movie_posters = [get_poster(movie) for movie in movie_names]
     
@@ -76,7 +79,7 @@ def generate_table(movies, posters):
         
         # Extract the information from the dictionary
         poster_url = movie_data["poster"]
-        title = movie_data["title"]
+        title = f"{movie_data['title']} ({movie_data['year']})" 
         director = movie_data["director"]
         cast = movie_data["cast"]
         genres = movie_data["genres"]
@@ -127,7 +130,7 @@ iface = gr.Interface(
     inputs= [gr.Textbox(label="Enter a movie name (five movie in total!)"), gr.Slider(minimum=0, maximum=5, step=1, label="Rate the movie")],
     outputs= [gr.Textbox(label="Output", min_width=200), gr.components.Image(label="Poster", height=400, width=300), gr.components.HTML(label="Recommendations", height=400)],
     live= False,
-    examples=[["The Matrix"], ["The Lion King"], ["Titanic"], ['Fight Club'], ["Inception"]], 
+    examples=[["The Matrix"], ["The Lion King"], ["Titanic"], ['Fight Club'], ["Inception"], ["Pulp Fiction"], ["Forrest Gump"], ["Schindler’s List"]], 
     title = "Movie Recommender",
 
     )
