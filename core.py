@@ -6,11 +6,11 @@ def install(package):
     else:
         pip._internal.main(['install', package])
 
-print("Everything goes bang")
+print("Everything goes bang.")
 install('torch_geometric')
 install('torch_scatter')
 install('torch_sparse')
-print("It's havoc baby")
+print("It's havoc baby!")
 
 import pickle
 import numpy as np 
@@ -158,7 +158,7 @@ def create_user_embedding(movie_ratings, movies_df):
     user_ratings_df['movieId'] = user_ratings_df.index
 
     # Merge the user_ratings_df with the movies_df to get the movie embeddings
-    user_movie_embeddings = (user_ratings_df).merge(movies_df, on='movieId', how='left')
+    user_movie_embeddings = user_ratings_df.merge(movies_df, on='movieId', how='left')
 
     # Multiply the ratings with the movie embeddings
     user_movie_embeddings = user_movie_embeddings.iloc[:, 2:].values * user_movie_embeddings['rating'].values[:, np.newaxis]
@@ -178,7 +178,16 @@ def find_closest_user(user_embedding, tree, user_embeddings):
 
     return closest_user_embedding
 
-def output_list(movie_ratings, movies_df = movie_embeds, tree = btree, user_embeddings = user_embeds, movies = final_movies):
+
+def drop_non_numerical_columns(df):
+    non_numerical_columns = df.select_dtypes(exclude=[float, int]).columns
+    return df.drop(columns=non_numerical_columns, inplace=False)
+
+def output_list(input_dict, movies_df = movie_embeds, tree = btree, user_embeddings = user_embeds, movies = final_movies):
+    movie_ratings = {}
+    for movie_title, rating in input_dict:
+        index = movies.index[movies['title'] == True].tolist()[0]
+        movie_ratings[index] = rating
     user_embed = create_user_embedding(movie_ratings, movie_embeds)
     # Call the find_closest_user function with the pre-built BallTree
     closest_user_embed = find_closest_user(user_embed, tree, user_embeds)
