@@ -186,9 +186,8 @@ def drop_non_numerical_columns(df):
 def output_list(input_dict, movies_df = movie_embeds, tree = btree, user_embeddings = user_embeds, movies = final_movies):
     movie_ratings = {}
     for movie_title in input_dict:
-        print(str(movie_title))
         index = movies.index[movies['title'] == movie_title].tolist()[0]
-        movie_ratings[index] = rating
+        movie_ratings[index] = input_dict[movie_title]
     user_embed = create_user_embedding(movie_ratings, movie_embeds)
     # Call the find_closest_user function with the pre-built BallTree
     closest_user_embed = find_closest_user(user_embed, tree, user_embeds)
