@@ -106,25 +106,25 @@ def display_movie(movie, rating):
     
     global user_input 
     data = get_data(movie)
-    if data['status'] == True:    
+    if data['status'] == 'True':    
         user_input[f"{data['title']} ({data['year']})"] = rating 
         poster = get_poster(data['title'])
 
-    if len(user_input) == 5:
-        # Get the recommended movies from the input 
-        r_movies, r_posters = get_recommendations(user_input) 
+        if len(user_input) == 5:
+            # Get the recommended movies from the input 
+            r_movies, r_posters = get_recommendations(user_input) 
+            
+            # Create a list with a list of HTML strings with information 
+            html_code =  generate_table(r_movies, r_posters)
+            
+            user_input = {}
+            # Return the output 
+            return f"Your movies are ready!\nPlease check the recommendations below.", np.zeros((500, 500, 3)), html_code
         
-        # Create a list with a list of HTML strings with information 
-        html_code =  generate_table(r_movies, r_posters)
-        
-        user_input = {}
-        # Return the output 
-        return f"Your movies are ready!\nPlease check the recommendations below.", np.zeros((500, 500, 3)), html_code
-    
-    elif data['status'] == True:
-        
-        # Return the input movie name and poster 
-        return f"You entered {movie} with rating {rating}", poster, ""
+        else:
+            
+            # Return the input movie name and poster 
+            return f"You entered {movie} with rating {rating}", poster, ""
     else:
         return f"we can't find {movie} please try again", np.zeros((500, 500, 3)), ""
 
