@@ -185,7 +185,8 @@ def drop_non_numerical_columns(df):
 
 def output_list(input_dict, movies_df = movie_embeds, tree = btree, user_embeddings = user_embeds, movies = final_movies):
     movie_ratings = {}
-    for movie_title, rating in input_dict:
+    for movie_title in input_dict:
+        print(str(movie_title))
         index = movies.index[movies['title'] == movie_title].tolist()[0]
         movie_ratings[index] = rating
     user_embed = create_user_embedding(movie_ratings, movie_embeds)
