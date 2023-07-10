@@ -13,9 +13,6 @@ user_recomms_file = open(addr + 'user_recomms.pkl', "rb")
 user_recomms = pickle.load(user_recomms_file)
 user_recomms_file.close()
 
-
-model.load_state_dict(torch.load(addr + 'model.pth'))
-
 final_movies_file = open(addr + 'final_movies.pkl', "rb")
 final_movies = pickle.load(final_movies_file)
 final_movies_file.close()
